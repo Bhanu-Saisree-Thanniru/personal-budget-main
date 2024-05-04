@@ -1,0 +1,79 @@
+// .container {
+//   display: flex;
+//   justify-content: space-between;
+// }
+
+// .table-container {
+//   flex: 1;
+//   padding: 20px;
+//   border: 1px solid #ccc;
+//   border-radius: 5px;
+//   margin-right: 20px;
+// }
+
+// .budget-table,
+// .income-table {
+//   width: 100%;
+//   border-collapse: collapse;
+// }
+
+// .budget-table th,
+// .budget-table td,
+// .income-table th,
+// .income-table td {
+//   padding: 10px;
+//   text-align: left;
+// }
+
+// .budget-table th,
+// .income-table th {
+//   background-color: #f5f5f5;
+// }
+
+// .budget-table tr:nth-child(even),
+// .income-table tr:nth-child(even) {
+//   background-color: #f9f9f9;
+// }
+
+
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.table-container {
+  flex: 1;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 20px;
+}
+
+.budget-table,
+.income-table,
+.add-budget-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.budget-table th,
+.budget-table td,
+.income-table th,
+.income-table td,
+.add-budget-table th,
+.add-budget-table td {
+  padding: 10px;
+  text-align: left;
+}
+
+.budget-table th,
+.income-table th,
+.add-budget-table th {
+  background-color: #f5f5f5;
+}
+
+.budget-table tr:nth-child(even),
+.income-table tr:nth-child(even),
+.add-budget-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}

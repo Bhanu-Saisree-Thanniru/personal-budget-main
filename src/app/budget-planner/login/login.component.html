@@ -1,0 +1,53 @@
+<!-- <main>
+  <form [formGroup]="myForm">
+    <h1>Welcome to the Personal Budget</h1>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input type="email" formControlName="email" matInput placeholder="Ex. pat@example.com" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input type="password" formControlName="password" matInput placeholder="Password" />
+    </mat-form-field>
+    <div class="rightAlignment">
+      <button
+        mat-button
+        color="primary"
+        [disabled]="!myForm.get('email')!.valid"
+        test-id="recover-password-button"
+      >
+        Recover Password
+      </button>
+    </div>
+
+    <button mat-button color="primary">LOGIN</button>
+    <button mat-stroked-button color="primary">Register</button>
+  </form>
+</main> -->
+
+<!-- <main>
+  <body> -->
+    <!-- <h1>Welcome to the Personal Budget</h1> -->
+    <!-- <div class="box"> -->
+      <form [formGroup]="myForm">
+        <h2>Login</h2>
+        <div class="inputBx">
+          <span></span>
+          <input type="text" placeholder="Username" formControlName="email" />
+        </div>
+        <div class="inputBx">
+          <span></span>
+          <input type="password" placeholder="Password" formControlName="password"/>
+        </div>
+        <div class="inputBx">
+          <input type="submit" value="Login" (click)="login()"/>
+        </div>
+        <div class="group">
+          <a href="#">Forgot Password</a>
+          <button type="submit" value="SignUp" (click) = "signUp()">SignUp</button>
+        </div>
+      </form>
+    <!-- </div> -->
+  <!-- </body>
+
+</main> -->
