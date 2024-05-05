@@ -64,7 +64,6 @@ app.get('/expense/items/month/:diff/:userId', async(req, res) => {
 
 app.get('/expense/items/amount/:diff/:userId', async(req, res) => {
   const { diff, userId } = req.params;
-  console.log("Diff: " + diff);
   const queryString = "SELECT *, SUM(amount) as amount FROM expense WHERE TIMESTAMPDIFF(MONTH, monthAndYear, CURDATE()) > 0 AND TIMESTAMPDIFF(MONTH, monthAndYear, CURDATE()) <= ? "
   + " AND userId = ? GROUP BY MONTH(monthAndYear) ORDER BY monthAndYear DESC;";
   connection.query(queryString, [diff, userId], function(error, results, fields){
@@ -82,7 +81,6 @@ app.get('/expense/items/:item/:userId', (req, res) => {
   const { item, userId } = req.params;
   connection.query('SELECT * FROM expense WHERE expenseType = ? AND YEAR(monthAndYear) = YEAR(CURDATE()) AND MONTH(monthAndYear) = MONTH(CURDATE()) AND userId = ?', [item, userId], (error, results) => {
       if (error) {
-          console.error('Error retrieving: '+ error);
           res.status(500).json({ error: 'Internal server error' });
           return;
       }
@@ -94,34 +92,38 @@ app.get('/expense/items/:item/:userId', (req, res) => {
   });
 });
 
-// End point to get current month total (expense)
-app.get('/expense/items/expense/total/:userId', (req, res) => {
-  console.log("server.js: calling to get expense");
+// End point to get total amount spent on each expense category
+app.get('/expense/items/category/total/:userId', (req, res) => {
   const { userId }  = req.params;
-  console.log("User id: " + userId);
-  connection.query('SELECT SUM(amount) as total_expense FROM expense WHERE YEAR(monthAndYear) = YEAR(CURDATE()) AND MONTH(monthAndYear) = MONTH(CURDATE()) AND userId = ?', [userId], (error,results) => {
+  connection.query("SELECT expenseType, SUM(amount) AS total_amount FROM expense WHERE YEAR(monthAndYear) = YEAR(CURDATE()) AND MONTH(monthAndYear) = MONTH(CURDATE()) AND userId = ? "+
+  "GROUP BY expensetype, Month(monthAndYear) ORDER by month(monthAndYear) DESC", [userId], (error,results) => {
     if (error) {
-      console.error('Error retrieving: ' + error);
       res.status(500).json({ error: 'Internal server error' });
       return;
     }
-    console.log("results: " + results);
+    res.json(results);
+  })
+})
+
+// End point to get current month total (expense)
+app.get('/expense/items/expense/total/:userId', (req, res) => {
+  const { userId }  = req.params;
+  connection.query('SELECT SUM(amount) as total_expense FROM expense WHERE YEAR(monthAndYear) = YEAR(CURDATE()) AND MONTH(monthAndYear) = MONTH(CURDATE()) AND userId = ?', [userId], (error,results) => {
+    if (error) {
+      res.status(500).json({ error: 'Internal server error' });
+      return;
+    }
     res.json(results);
   })
 })
 
 // End point to insert items
 app.post('/expense/items/:userId', (req, res) => {
-  console.log("request body: " + req.body);
   const { userId } = req.params;
-  //const {label, value} = req.body;
   const {date, expenseType, amount} = req.body;
-  console.log("User id: server.js: " + userId);
-  console.log("Label: " + expenseType + " value : " + amount + " Month and Year: " + date);
     if (!expenseType || amount <= 0) {
         return res.status(400).json({ error: 'Both expense type and amount are required' });
     }
-
     // Insert new expense data into the database
     connection.query('INSERT INTO expense (monthAndYear, expenseType, amount, userId) VALUES (?, ?, ?, ?)', [date, expenseType, amount, userId], (error, results) => {
         if (error) {
@@ -138,13 +140,9 @@ app.post('/expense/items/:userId', (req, res) => {
 app.put('/expense/items/:item/:userId', async (req, res) => {
   const { item, userId } = req.params;
   const { amount } = req.body;
-
-  console.log("Label : " + item + " params label: " + req.params.item);
-  console.log("Value : " + amount);
   if (!amount) {
       return res.status(400).json({ error: 'Value is required' });
   }
-
   // Update label's value in the expense database
   connection.query('UPDATE expense SET amount = ? WHERE expenseType = ? AND userId = ? ', [amount, item, userId], async (error, results) => {
       if (error) {
@@ -163,7 +161,6 @@ app.put('/expense/items/:item/:userId', async (req, res) => {
 // Endpoint to delete expense data
 app.delete('/expense/items/:item/:userId', (req, res) => {
   const { item } = req.params;
-
   // Delete the expense data from the database
   connection.query('DELETE FROM expense WHERE expenseType = ? AND userId = ?', [item, userId], (error, results) => {
       if (error) {
@@ -186,7 +183,6 @@ app.get('/income/:userId', async(req, res) => {
   const { userId } = req.params;
   connection.query('SELECT * FROM income where userId = ?', [userId], function(error, results, fields){
       if(error){
-        console.log("Error: " + error);
         res.status(500).json({ error: 'Internal server error' });
         return;
       }
@@ -196,7 +192,6 @@ app.get('/income/:userId', async(req, res) => {
 
 app.get('/income/month/:month/:userId', (req, res) => {
   const { month, userId } = req.params;
-  console.log(" Server.js Month: " + month + "User id: " + userId);
   connection.query('SELECT amount FROM income WHERE month = ? AND userId = ?', [month, userId], (error, results) => {
       if (error) {
           console.error('Error retrieving: '+ error);
@@ -214,7 +209,6 @@ app.get('/income/month/:month/:userId', (req, res) => {
 // Endpoint to get a specific month's and year's amount
 app.get('/income/month/:month/year/:year/:userId', (req, res) => {
 const { month, year, userId } = req.params;
-console.log(" Server.js Month: " + month + "year: " + year + " user id: " + userId);
 connection.query('SELECT amount FROM income WHERE month = ? AND year = ? AND userId = ?', [month, year, userId], (error, results) => {
     if (error) {
         console.error('Error retrieving: '+ error);
@@ -225,7 +219,6 @@ connection.query('SELECT amount FROM income WHERE month = ? AND year = ? AND use
         res.status(404).json({ error: 'Data not found with this month and year' });
         return;
     }
-    console.log("Results from month and year : " +results);
     res.json(results);
 });
 });

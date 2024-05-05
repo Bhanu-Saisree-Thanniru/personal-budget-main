@@ -1,0 +1,10 @@
+{
+  "routes": [
+    "/",
+    "/budget",
+    "/budget/dashboard",
+    "/budget/history",
+    "/budget/login",
+    "/budget/side-nav"
+  ]
+}
