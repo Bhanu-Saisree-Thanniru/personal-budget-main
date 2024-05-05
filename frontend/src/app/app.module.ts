@@ -35,7 +35,8 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
     AngularFireAuthModule,
     RouterModule,
   ],
-  providers: [provideClientHydration(), provideAnimationsAsync(),provideMomentDateAdapter(undefined, {useUtc: true})],
+  providers: [provideClientHydration(), provideAnimationsAsync(),provideMomentDateAdapter(undefined, {useUtc: true}),
+             { provide: LocationStrategy, useClass: HashLocationStrategy }],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent],
 })
