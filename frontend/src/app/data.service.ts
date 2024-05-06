@@ -1,20 +1,10 @@
-// import { Injectable } from '@angular/core';
-
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class DataService {
-
-//   constructor() { }
-// }
-
-
 import { BehaviorSubject, Observable, from } from 'rxjs';
 import { Injectable } from '@angular/core';
 import axios, { AxiosResponse } from 'axios';
 import { Budget } from './budget-planner/dashboard/add-budget/Budget';
 import { Income } from './budget-planner/dashboard/add-income/Income';
 import { Expense } from './budget-planner/dashboard/add-expense/Expense';
+import { environment } from './environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +21,8 @@ export class DataService {
 public respData: any = [];
 
 // expense
-private requestUrl = 'http://localhost:3000/expense/items';
+private requestUrl =`${environment.apiUrl}/earnings`;
+//private requestUrl = 'http://localhost:3000/expense/items';
 
 getExpenseData(userId: string): Observable<Expense[]> {
   return from(axios.get<Expense[]>(`${this.requestUrl}/${userId}`)
@@ -96,7 +87,8 @@ deleteExpenseItem(userId: string, itemName: any): Observable<null>  {
 
 
 // Income APIs
-private incomeUrl = 'http://localhost:3000/income';
+private incomeUrl =`${environment.apiUrl}/income`;
+//private incomeUrl = 'http://localhost:3000/income';
 
 getIncomeData(userId: string): Observable<Income[]> {
   return from(axios.get<Income[]>(`${this.incomeUrl}/${userId}`)
@@ -176,7 +168,8 @@ deleteIncomeData(userId: string, month: any): Observable<null>  {
 
 
 // budget
-private budgetUrl = 'http://localhost:3000/budget/items';
+private budgetUrl =`${environment.apiUrl}/items`;
+//private budgetUrl = 'http://localhost:3000/budget/items';
 
 getBudgetData(userId: string): Observable<Budget[]> {
   return from(axios.get<Budget[]>(`${this.budgetUrl}/${userId}`)

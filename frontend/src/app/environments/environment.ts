@@ -8,5 +8,8 @@ export const defaultEnvironment = {
     appId: '1:362355297871:web:c4fea06d7fb49da9f3643a',
     measurementId: 'G-QNL0QXF0SV',
   },
-  production: false,
 };
+export const environment = {
+  production : true,
+  apiUrl:'http://localhost:3000',
+}
