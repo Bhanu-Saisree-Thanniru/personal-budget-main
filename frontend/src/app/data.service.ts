@@ -21,7 +21,7 @@ export class DataService {
 public respData: any = [];
 
 // expense
-private requestUrl =`${environment.apiUrl}/earnings`;
+private requestUrl =`${environment.apiUrl}/expense/items`;
 //private requestUrl = 'http://localhost:3000/expense/items';
 
 getExpenseData(userId: string): Observable<Expense[]> {
@@ -168,7 +168,7 @@ deleteIncomeData(userId: string, month: any): Observable<null>  {
 
 
 // budget
-private budgetUrl =`${environment.apiUrl}/items`;
+private budgetUrl =`${environment.apiUrl}/budget/items`;
 //private budgetUrl = 'http://localhost:3000/budget/items';
 
 getBudgetData(userId: string): Observable<Budget[]> {
