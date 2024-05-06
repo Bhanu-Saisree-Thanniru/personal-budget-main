@@ -12,10 +12,14 @@ import { environment } from './environments/environment';
 export class DataService {
   constructor() {
   }
-  // private incomeDataSubject = new BehaviorSubject<number[]>([]);
-  // incomeData$ = this.incomeDataSubject.asObservable();
-  private messageSource = new BehaviorSubject<boolean>(false); // Initial value is an empty string
-  currentMessage$ = this.messageSource.asObservable();
+  private incomeDataSubject = new BehaviorSubject<boolean>(false);
+  incomeData$ = this.incomeDataSubject.asObservable();
+
+  private expenseDataSubject = new BehaviorSubject<boolean>(false);
+  expenseData$ = this.expenseDataSubject.asObservable();
+
+  private budgetDataSubject = new BehaviorSubject<boolean>(false);
+  budgetData$ = this.budgetDataSubject.asObservable();
 
 
 public respData: any = [];
@@ -224,7 +228,13 @@ deleteBudgetItem(userId: string, itemName: any): Observable<null>  {
     .then(() => null))
 }
 
-changeMessage(message: boolean) {
-  this.messageSource.next(message);
+changeIncomeMessage(message: boolean) {
+  this.incomeDataSubject.next(message);
+}
+changeExpenseMessage(message: boolean) {
+  this.expenseDataSubject.next(message);
+}
+changeBudgetMessage(message: boolean) {
+  this.budgetDataSubject.next(message);
 }
 }

@@ -94,7 +94,7 @@ signUp(){
 }
 
 inActivityTimerStart(){
-  const inactivityTimeLimit = 50 * 100000;
+  const inactivityTimeLimit = 50 * 1000;
 
     let timerId = setTimeout(() => this.logout(), inactivityTimeLimit);
 

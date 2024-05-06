@@ -215,10 +215,10 @@ connection.query('SELECT amount FROM income WHERE month = ? AND year = ? AND use
         res.status(500).json({ error: 'Internal server error' });
         return;
     }
-    if (results.length === 0) {
-        res.status(404).json({ error: 'Data not found with this month and year' });
-        return;
-    }
+    // if (results.length === 0) {
+    //     res.status(404).json({ error: 'Data not found with this month and year' });
+    //     return;
+    // }
     res.json(results);
 });
 });
@@ -242,22 +242,62 @@ app.get('/income/:diff/:userId', async(req, res) => {
 });
 
 // End point to insert month income
+// app.post('/income/:userId', (req, res) => {
+// const { userId } = req.params;
+// const { months, amount, year } = req.body;
+// console.log("Month : " + months + " amount: " + amount);
+//   if (!months || !amount || !year) {
+//       return res.status(400).json({ error: 'Month, year and amount are required' });
+//   }
+
+//   // Insert new income data into the database
+//   connection.query('INSERT INTO income (month, amount, year, userId) VALUES (?,?,?,?)', [months, amount, year, userId], (error, results) => {
+//       if (error) {
+//           console.error('Error inserting into database:', error);
+//           res.status(500).json({ error: 'Internal server error' });
+//           return;
+//       }
+//       res.json({ message: 'Income and month added successfully' });
+//   });
+// });
+
 app.post('/income/:userId', (req, res) => {
-const { userId } = req.params;
-const { months, amount, year } = req.body;
-console.log("Month : " + months + " amount: " + amount);
+  const { userId } = req.params;
+  const { months, amount, year } = req.body;
+  console.log("Month : " + months + " amount: " + amount);
   if (!months || !amount || !year) {
-      return res.status(400).json({ error: 'Month, year and amount are required' });
+      return res.status(400).json({ error: 'Month, year, and amount are required' });
   }
 
-  // Insert new income data into the database
-  connection.query('INSERT INTO income (month, amount, year, userId) VALUES (?,?,?,?)', [months, amount, year, userId], (error, results) => {
+  // Check if the record exists for the given user, month, and year
+  connection.query('SELECT * FROM income WHERE userId = ? AND month = ? AND year = ?', [userId, months, year], (error, results) => {
       if (error) {
-          console.error('Error inserting into database:', error);
+          console.log('Error querying database:'+ error);
           res.status(500).json({ error: 'Internal server error' });
           return;
       }
-      res.json({ message: 'Income and month added successfully' });
+      console.log("results length: "+ results.length);
+      if (results.length > 0) {
+          // If the record exists, update it
+          connection.query('UPDATE income SET amount = ? WHERE userId = ? AND month = ? AND year = ?', [amount, userId, months, year], (error, results) => {
+              if (error) {
+                  console.error('Error updating database:', error);
+                  res.status(500).json({ error: 'Internal server error' });
+                  return;
+              }
+              res.json({ message: 'Income updated successfully' });
+          });
+      } else {
+          // If the record doesn't exist, insert a new record
+          connection.query('INSERT INTO income (month, amount, year, userId) VALUES (?,?,?,?)', [months, amount, year, userId], (error, results) => {
+              if (error) {
+                  console.error('Error inserting into database:', error);
+                  res.status(500).json({ error: 'Internal server error' });
+                  return;
+              }
+              res.json({ message: 'Income added successfully' });
+          });
+      }
   });
 });
 

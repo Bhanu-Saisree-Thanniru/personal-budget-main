@@ -20,6 +20,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { PrevHistoryComponent } from './prev-history/prev-history.component';
 import { SignupComponent } from './signup/signup.component';
 import { InActivityComponent } from './in-activity/in-activity.component';
+import { LineChartComponent } from './dashboard/Charts/line-chart/line-chart.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { InActivityComponent } from './in-activity/in-activity.component';
     UserProfileComponent,
     PrevHistoryComponent,
     SignupComponent,
-    InActivityComponent
+    InActivityComponent,
+    LineChartComponent
     //LogoutPopupComponent
   ],
   imports: [

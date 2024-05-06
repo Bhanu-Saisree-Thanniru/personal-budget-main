@@ -3,18 +3,18 @@
   <body>
     <h1>Welcome to the Personal Budget</h1>
     <div class="box">
-      <form>
+      <form [formGroup]="signupForm">
         <h2>Sign Up</h2>
         <div class="inputBx">
           <span></span>
-          <input type="text" placeholder="Username" />
+          <input type="text" placeholder="Username" formControlName="email" />
         </div>
         <div class="inputBx">
           <span></span>
-          <input type="password" placeholder="Password" />
+          <input type="password" placeholder="Password" formControlName="password" />
         </div>
         <div class="inputBx">
-          <input type="submit" value="Sign Up" (click)="signUp()" />
+          <input type="submit" value="SignUp" (click)="signUp()"/>
         </div>
         <div class="group">
           <a href="#" (click)="navToLogin()"

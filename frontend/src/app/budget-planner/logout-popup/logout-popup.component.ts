@@ -35,7 +35,7 @@ export class LogoutPopupComponent {
       })
       .afterDismissed()
       .subscribe(() => {
-        this.router.navigate(['/login']);
+        this.router.navigate(['/budget/login']);
       });
   }
 }

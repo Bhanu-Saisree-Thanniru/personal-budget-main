@@ -43,14 +43,13 @@ export class AddIncomeComponent {
 
 
   ngOnInit(): void {
-    this.userId = this.authService.userId;
+    this.userId = this.authService.getFirebaseUserId();
     this.getIncomeData();
   }
 
   getIncomeData() {
     this.dataService.getIncomeData(this.userId)
       .subscribe((income) => { this.income = income;
-        return this
       }
       ,error => { console.log("error : " + error)});
   }
@@ -63,14 +62,14 @@ export class AddIncomeComponent {
     }
     else{
       const resp = this.getIncomeDataByMonthAndYear();
-      console.log("resp: " + resp);
-      // this.dataService.insertIncomeData(this.addIncome.value)
-      // .subscribe(response => {
-      //   //this.getBudgetItems();
-      //   console.log(" Income data added successfully");
-      //   console.log("response is : " + response);
-      // }
-      // ,error => { console.log("Error: " + error)});
+    //   console.log("resp: " + resp);
+    //   this.dataService.insertIncomeData(this.addIncome.value)
+    //   .subscribe(response => {
+    //     //this.getBudgetItems();
+    //     console.log(" Income data added successfully");
+    //     console.log("response is : " + response);
+    //   }
+    //   ,error => { console.log("Error: " + error)});
     }
   }
   addIncomeData() {
@@ -80,8 +79,7 @@ export class AddIncomeComponent {
       console.log("Month, year and amount are required");
     }
     else{
-      this.getIncomeDataByMonthAndYear()
-      .subscribe(response => {
+      this.getIncomeDataByMonthAndYear().subscribe(response => {
         if(response.length > 0){
           console.log("add income: calling updating func ");
           this.updateIncomeData();
@@ -115,9 +113,9 @@ export class AddIncomeComponent {
   addIncomeDataToDB(){
     this.dataService.insertIncomeData(this.userId, this.addIncome.value)
       .subscribe(response => {
-        //this.getBudgetItems();
-        this.updatedDataEvent.emit(response);
-        this.dialogRef.close(response);
+        this.getIncomeData();
+        //this.updatedDataEvent.emit(response);
+        //this.dialogRef.close(response);
         console.log(" Income data added successfully");
         console.log("response is : " + response);
       }
@@ -126,8 +124,8 @@ export class AddIncomeComponent {
   updateIncomeData() {
     this.dataService.updateIncomeData(this.userId, this.addIncome.value)
       .subscribe(response => {
-        this.getIncomeData();
-        this.updatedDataEvent.emit(this.getIncomeData());
+        this.income = response;
+        //this.getIncomeData();
       }
       ,error => { console.log("Error: " + error)});
   }

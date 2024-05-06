@@ -170,10 +170,8 @@ export class DashboardComponent {
     setTimeout(() => {
       this.getIncomeData();
       this.getCurrentMonIncomeData();
-    }, 100)
-      // Trigger change detection if needed
-      this.onIncomeAdded(result);
-      this.dataService.changeMessage(true);
+    }, 200)
+      this.dataService.changeIncomeMessage(true);
   });
   }
   onExpense() {
@@ -184,7 +182,7 @@ export class DashboardComponent {
     dialogRef.afterClosed().subscribe(result => {
       this.getExpenseData();
       this.getCurrentMonthExpenseData();
-      this.dataService.changeMessage(true);
+      this.dataService.changeExpenseMessage(true);
     });
   }
   onBudget() {
@@ -195,7 +193,7 @@ export class DashboardComponent {
     dialogRef.afterClosed().subscribe(result => {
         this.getBudgetData();
         this.getCurrentMonthBudgetData();
-        this.dataService.changeMessage(true);
+        this.dataService.changeBudgetMessage(true);
     });
   }
 

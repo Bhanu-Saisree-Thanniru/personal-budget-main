@@ -1,4 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; background:coral}
+html, body {
+  height: 100%;
+  //background:coral
+  background-image: url('../assets/nbad_1.avif');
+  background-repeat: no-repeat;
+  background-position: center;
+}
 //body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

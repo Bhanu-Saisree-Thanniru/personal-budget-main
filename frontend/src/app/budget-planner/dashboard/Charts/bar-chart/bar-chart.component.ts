@@ -9,7 +9,7 @@ import { Subscription, switchMap } from 'rxjs';
   templateUrl: './bar-chart.component.html',
   styleUrls: ['./bar-chart.component.scss']
 })
-export class BarChartComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges {
+export class BarChartComponent implements OnInit, AfterViewInit, OnDestroy {
   totalCurrentMonthIncome: number = 0;
   currentMonthIncome: string = '';
   totalCurrentMonthExpense: number = 0;
@@ -20,27 +20,25 @@ export class BarChartComponent implements OnInit, AfterViewInit, OnDestroy, OnCh
   private dataSubscription!: Subscription;
 
   constructor(private dataService: DataService, private authService: AuthenticationService) { }
-  ngOnChanges(changes: SimpleChanges): void {
-    //throw new Error('Method not implemented.');
-    this.dataService.currentMessage$.subscribe(
+
+
+  ngOnInit():void{
+    this.userId = this.authService.getFirebaseUserId();
+    this.fetchData();
+    this.dataService.expenseData$.subscribe(
       value => {
-        console.log("Value: " + value);
         if (value) {
           this.fetchData();
       }
     }
     )
-  }
-
-  // ngOnChange(): void {
-  //   this.userId = this.authService.getFirebaseUserId();
-  //   if (this.userId !== undefined) {
-  //     this.fetchData();
-  //   }
-  // }
-
-  ngOnInit():void{
-    this.userId = this.authService.getFirebaseUserId();
+    this.dataService.budgetData$.subscribe(
+      value => {
+        if (value) {
+          this.fetchData();
+      }
+    }
+    )
   }
   // fetchData(): void {
   //   const currentDate = new Date();
@@ -79,9 +77,20 @@ export class BarChartComponent implements OnInit, AfterViewInit, OnDestroy, OnCh
     const currentYear = currentDate.getFullYear();
 
     // Fetch income data
-    this.dataService.getIncomeByMonth(this.userId, this.months[currentMonth], currentYear).pipe(
+    // this.dataService.getIncomeByMonth(this.userId, this.months[currentMonth], currentYear).pipe(
+    //   switchMap(income => {
+    //     this.data = [];
+    //     this.totalCurrentMonthIncome = income[0].amount;
+    //     this.currentMonthIncome = "$" + this.totalCurrentMonthIncome;
+    //     this.data.push({ "Framework": "Income", "Stars": this.totalCurrentMonthIncome });
+
+    //     // Fetch expense data
+    //     return this.dataService.getCurrentMonthBudget(this.userId);
+    //   })
+    this.dataService.getCurrentMonthExpense(this.userId).pipe(
       switchMap(income => {
-        this.totalCurrentMonthIncome = income[0].amount;
+        this.data = [];
+        this.totalCurrentMonthIncome = income[0].total_expense;
         this.currentMonthIncome = "$" + this.totalCurrentMonthIncome;
         this.data.push({ "Framework": "Income", "Stars": this.totalCurrentMonthIncome });
 
@@ -93,7 +102,7 @@ export class BarChartComponent implements OnInit, AfterViewInit, OnDestroy, OnCh
         this.totalCurrentMonthExpense = budget[0].total_expense;
         this.currentMonthExpense = "$" + this.totalCurrentMonthExpense;
         this.data.push({ "Framework": "Budget", "Stars": this.totalCurrentMonthExpense });
-
+        d3.select("figure#bar").selectAll("*").remove();
         // After both income and expense data fetched, draw bars
         this.createSvg();
         this.drawBars(this.data);
@@ -126,14 +135,16 @@ export class BarChartComponent implements OnInit, AfterViewInit, OnDestroy, OnCh
       .attr("transform", "translate(" + this.margin + "," + this.margin + ")");
   }
 
-  private updateChart(): void {
-    // Clear existing SVG
-    d3.select("figure#bar svg").remove();
+  // private updateChart(): void {
 
-    // Recreate SVG and redraw bars
-    this.createSvg();
-    this.drawBars(this.data);
-  }
+  //   d3.select("figure#bar").selectAll("*").remove();
+  //   // Clear existing SVG
+  //   // d3.select("figure#bar svg").remove();
+
+  //   // Recreate SVG and redraw bars
+  //   this.createSvg();
+  //   this.drawBars(this.data);
+  // }
 
   private drawBars(data: any[]): void {
     // Find the maximum value for adjusting the Y-axis domain dynamically

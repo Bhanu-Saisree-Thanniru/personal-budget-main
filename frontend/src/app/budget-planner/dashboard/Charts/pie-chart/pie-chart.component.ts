@@ -22,7 +22,8 @@ export class PieChartComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.userId = this.authService.getFirebaseUserId();
-    this.dataService.currentMessage$.subscribe(
+    //this.fetchData();
+    this.dataService.expenseData$.subscribe(
       value => {
         if (value) {
           this.fetchData();

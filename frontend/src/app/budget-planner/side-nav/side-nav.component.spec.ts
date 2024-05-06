@@ -1,6 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SideNavComponent } from './side-nav.component';
+import { MatDialogRef, MAT_DIALOG_DATA,  } from '@angular/material/dialog';
+// Inside your TestBed configuration
+providers: [
+    { provide: MatDialogRef, useValue: {} } // You can also provide a mock implementation if needed
+]
 
 describe('SideNavComponent', () => {
   let component: SideNavComponent;
@@ -11,7 +16,7 @@ describe('SideNavComponent', () => {
       declarations: [SideNavComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(SideNavComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

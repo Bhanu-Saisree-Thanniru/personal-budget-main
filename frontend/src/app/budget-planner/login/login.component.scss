@@ -50,17 +50,28 @@
   font-family: "Poppins", sans-serif;
 }
 h1 {
-  color: #fff;
+  color: cornflowerblue;
   align-items: center;
   justify-content: center;
   display: flex;
+  font-size: 45px;
 }
 body {
   display: flex;
-  justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #207e98;
+  justify-content: right;
+  margin-right: 5%;
+  // background-color: #207e98;
+}
+button{
+  background-color: aliceblue;
+  color: cornflowerblue;
+  border: none;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.75em;
+  font-weight: 500;
 }
 @property --a {
   syntax: "<angle>";
@@ -115,19 +126,20 @@ body {
   content: "";
   position: absolute;
   inset: 2px;
-  border: 20px solid #222;
-  background: #303030;
+  //border: 20px solid #222;
+  // background: #303030;
+  background: linear-gradient(5deg, aliceblue, transparent);
 }
 form {
   position: relative;
   z-index: 1000;
 }
 form h2 {
-  color: #fff;
-  font-weight: 500;
   margin-bottom: 20px;
   padding-top: 60px;
   width: 100%;
+  color: cornflowerblue;
+  font-weight: 600;
   text-align: center;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -149,13 +161,13 @@ form h2 {
   inset: -2px;
   background: repeating-conic-gradient(
     from var(--a),
-    #01dbc2 0%,
-    #01dbc2 10%,
+    rgb(43, 69, 117),
+    rgb(43, 69, 117) 10%,
     transparent 10%,
     transparent 50%
   );
-  animation: animate 6s linear infinite;
-  box-shadow: 0 0 0 2px #000;
+  //animation: animate 6s linear infinite;
+  box-shadow: 0 0 0 2px whitesmoke;
 }
 .inputBx:nth-child(2) span::before {
   animation-delay: -1.5s;
@@ -164,7 +176,7 @@ form h2 {
   content: "";
   position: absolute;
   inset: 0;
-  background: #292929;
+  background: aliceblue;
 }
 .inputBx input {
   position: relative;
@@ -173,23 +185,30 @@ form h2 {
   border: none;
   width: 100%;
   padding: 8px 14px;
-  background: transparent;
-  color: #fff;
+  background: rgb(241, 244, 247);
+  color: cornflowerblue;
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
 .inputBx input::placeholder {
-  color: #fff;
+  color: rgb(53, 86, 147);
   opacity: 0.5;
+  font-weight: 600;
 }
 .inputBx input[type="submit"] {
-  background: #01dbc2;
+  // background: #01dbc2;
+  // cursor: pointer;
+  // box-shadow: 0 0 0 4px #01dbc2;
+  // width: 100%;
+  // font-weight: 500;
+  // color: #292929;
+  // filter: drop-shadow(0 0 0 15px #01dbc2);
+  background: aliceblue;
   cursor: pointer;
-  box-shadow: 0 0 0 4px #01dbc2;
+  box-shadow: 0 0 0 4px cornflowerblue;
   width: 100%;
-  font-weight: 500;
-  color: #292929;
-  filter: drop-shadow(0 0 0 15px #01dbc2);
+  font-weight: 600;
+  color: cornflowerblue;
 }
 .group {
   position: relative;
@@ -200,13 +219,13 @@ form h2 {
 }
 .group a {
   text-decoration: none;
-  color: #fff8;
+  color: cornflowerblue;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-size: 0.75em;
 }
 .group a:nth-child(2),
 .group a:hover {
-  color: #01dbc2;
+  color: #05afe3;
   filter: drop-shadow(0 0 0 5px #01dbc2);
 }
