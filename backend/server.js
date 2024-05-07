@@ -10,19 +10,10 @@ const port = process.env.port || 3000;
 const app = express();
 
 var connection = mysql.createPool({
-  // asmaf15@decisionao.com
-    // host: 'sql5.freemysqlhosting.net',
-    // user: 'sql5700145',
-    // password: 'WHRmKuamg4',
-    // database: 'sql5700145'
-    // host: 'sql3.freesqldatabase.com',
-    // user: 'sql3702214',
-    // password: 'aFTbJmipKk',
-    // database: 'sql3702214'
-    host: 'sql3.freesqldatabase.com',
-    user: 'sql3703873',
-    password: '3jzt68k3vr',
-    database: 'sql3703873'
+    host: 'sql3.freemysqlhosting.net',
+    user: 'sql3704596',
+    password: 'TZKAElGnW9',
+    database: 'sql3704596'
 });
 
 //app.use(express.json());
