@@ -7,7 +7,7 @@
       <mat-label>Month</mat-label>
       <mat-select formControlName="months">
         @for (month of months; track month) {
-          <mat-option [value]="month">{{month}}</mat-option>
+          <mat-option id="month" [value]="month">{{month}}</mat-option>
         }
       </mat-select>
     </mat-form-field>
@@ -17,7 +17,7 @@
       <mat-label>Year</mat-label>
       <mat-select formControlName="year">
         @for (year of years; track year) {
-          <mat-option [value]="year">{{ year }}</mat-option>
+          <mat-option id="year" [value]="year">{{ year }}</mat-option>
         }
       </mat-select>
     </mat-form-field>
@@ -25,13 +25,13 @@
     <div>
         <mat-form-field class="amount">
             <mat-label>Amount($)</mat-label>
-            <input formControlName="amount" matInput type="number" placeholder="">
+            <input formControlName="amount" id="amount" matInput type="number" placeholder="">
             <!-- [formControl]="amount" -->
           </mat-form-field>
     </div>
 </mat-dialog-content>
 <mat-dialog-actions>
-    <button mat-button mat-dialog-close (click)="addIncomeData()">Ok</button>
+    <button mat-button mat-dialog-close id="ok" (click)="addIncomeData()">Ok</button>
     <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
     <button mat-button (click)="onNoClick()">Close</button>
   </mat-dialog-actions>

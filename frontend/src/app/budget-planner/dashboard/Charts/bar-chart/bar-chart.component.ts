@@ -18,6 +18,8 @@ export class BarChartComponent implements OnInit, AfterViewInit, OnDestroy {
   userId!: string;
   months: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   private dataSubscription!: Subscription;
+  totalCurrentMonthBudget: any;
+  currentMonthBudget!: string;
 
   constructor(private dataService: DataService, private authService: AuthenticationService) { }
 
@@ -40,37 +42,7 @@ export class BarChartComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     )
   }
-  // fetchData(): void {
-  //   const currentDate = new Date();
-  //   const currentMonth = currentDate.getMonth();
-  //   const currentYear = currentDate.getFullYear();
 
-  //   this.dataService.getIncomeByMonth(this.userId, this.months[currentMonth], currentYear).subscribe(
-  //     income => {
-  //       this.totalCurrentMonthIncome = income[0].amount;
-  //       this.currentMonthIncome = "$" + this.totalCurrentMonthIncome;
-  //       this.data.push({ "Framework": "Income", "Stars": this.totalCurrentMonthIncome });
-
-  //       // Fetch expense data
-  //       this.dataService.getCurrentMonthBudget(this.userId).subscribe(
-  //         budget => {
-  //           this.totalCurrentMonthExpense = budget[0].total_expense;
-  //           this.currentMonthExpense = "$" + this.totalCurrentMonthExpense;
-  //           this.data.push({ "Framework": "Expense", "Stars": this.totalCurrentMonthExpense });
-
-  //           // After both income and expense data fetched, draw bars
-  //           this.updateChart();
-  //         },
-  //         error => {
-  //           console.error("Error fetching expense data:", error);
-  //         }
-  //       );
-  //     },
-  //     error => {
-  //       console.error("Error fetching income data:", error);
-  //     }
-  //   );
-  // }
   fetchData(): void {
     const currentDate = new Date();
     const currentMonth = currentDate.getMonth();
@@ -88,20 +60,20 @@ export class BarChartComponent implements OnInit, AfterViewInit, OnDestroy {
     //     return this.dataService.getCurrentMonthBudget(this.userId);
     //   })
     this.dataService.getCurrentMonthExpense(this.userId).pipe(
-      switchMap(income => {
+      switchMap(expense => {
         this.data = [];
-        this.totalCurrentMonthIncome = income[0].total_expense;
-        this.currentMonthIncome = "$" + this.totalCurrentMonthIncome;
-        this.data.push({ "Framework": "Income", "Stars": this.totalCurrentMonthIncome });
+        this.totalCurrentMonthExpense = expense[0].total_expense;
+        this.currentMonthExpense = "$" + this.totalCurrentMonthExpense;
+        this.data.push({ "Framework": "Expense", "Stars": this.totalCurrentMonthExpense });
 
         // Fetch expense data
         return this.dataService.getCurrentMonthBudget(this.userId);
       })
     ).subscribe(
       budget => {
-        this.totalCurrentMonthExpense = budget[0].total_expense;
-        this.currentMonthExpense = "$" + this.totalCurrentMonthExpense;
-        this.data.push({ "Framework": "Budget", "Stars": this.totalCurrentMonthExpense });
+        this.totalCurrentMonthBudget = budget[0].total_expense;
+        this.currentMonthBudget = "$" + this.totalCurrentMonthBudget;
+        this.data.push({ "Framework": "Budget", "Stars": this.totalCurrentMonthBudget });
         d3.select("figure#bar").selectAll("*").remove();
         // After both income and expense data fetched, draw bars
         this.createSvg();
@@ -182,6 +154,6 @@ export class BarChartComponent implements OnInit, AfterViewInit, OnDestroy {
       .attr("y", (d: any) => y(d.Stars))
       .attr("width", x.bandwidth())
       .attr("height", (d: any) => this.height - y(d.Stars))
-      .attr("fill", (d: any) => d.Framework === "Income" ? "#3182bd" : "#d04a35"); // Adjust fill color based on data
+      .attr("fill", (d: any) => d.Framework === "Expense" ? "#3182bd" : "#d04a35"); // Adjust fill color based on data
   }
 }

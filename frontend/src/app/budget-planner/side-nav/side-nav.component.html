@@ -1,19 +1,12 @@
-<div class="navbar">
-  <h2 class="heading">Personal-Budget-app</h2>
-</div>
-
-<div>
-  <div class="toggle-button-row" (click)="toggleSlideOut()">
-    <mat-icon>menu</mat-icon>
-  </div>
-</div>
-
-<div class="slide-out-panel" [class.slide-out]="isSlideOut">
-  <div class="slide-out-content">
-    <h3 class="nav">Budget Planner</h3>
-    <p class="edit-col" (click)="onDash()">Dashboard</p>
-    <p class="edit-col" (click)="onProfile()">Profile</p>
-    <p class="edit-col" (click)="onHistory()">Prev History</p>
-    <p class="edit-col" (click)="onLogout()">Log Out</p>
-  </div>
-</div>
+<mat-toolbar color="primary">
+  <h2 class="heading">Personal Budget Application</h2>
+  <span class="example-spacer"></span>
+  <mat-divider [inset]="true" orientation="vertical"></mat-divider>
+  <button mat-button (click)="onDash()">Dashboard</button>
+  <mat-divider [inset]="true" orientation="vertical"></mat-divider>
+  <button mat-button (click)="onProfile()">Profile</button>
+  <mat-divider [inset]="true" orientation="vertical"></mat-divider>
+  <button mat-button (click)="onHistory()">Prev History</button>
+  <mat-divider [inset]="true" orientation="vertical"></mat-divider>
+  <button mat-button (click)="onSignOut()">Log Out</button>
+</mat-toolbar>

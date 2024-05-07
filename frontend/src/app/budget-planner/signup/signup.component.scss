@@ -1,0 +1,231 @@
+// main {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   justify-content: center;
+//   margin-top: 10%;
+//   width: 100%;
+//   height: 100%;
+// }
+// form {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   flex-direction: column;
+
+//   button,
+//   mat-form-field {
+//     width: -webkit-fill-available;
+//   }
+//   button {
+//     margin: 5px 0;
+
+//     &[mat-button] {
+//       background-color: #3cf436;
+//       color: white;
+//       font-weight: bold;
+//       &:hover {
+//         background-color: #4a2fd3;
+//       }
+//     }
+//   }
+
+//   .aligned-to-right {
+//     text-align: right;
+//     width: 100%;
+//   }
+// }
+// h1 {
+//   font-size: 2rem;
+//   margin-bottom: 1rem;
+//   color: whitesmoke;
+// }
+
+//
+//@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+h1 {
+  color: cornflowerblue;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  font-size: 45px;
+}
+body {
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  justify-content: right;
+  margin-right: 5%;
+  // background-color: #207e98;
+}
+button{
+  background-color: aliceblue;
+  color: cornflowerblue;
+  border: none;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.75em;
+  font-weight: 500;
+}
+@property --a {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+.box {
+  position: relative;
+  width: 400px;
+  min-height: 400px;
+  background-color: repeating-conic-gradient(
+    from var(--a),
+    #01dbc2 0%,
+    #01dbc2 10%,
+    transparent 10%,
+    transparent 50%
+  );
+  animation: animate 6s linear infinite;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+@keyframes animate {
+  0% {
+    --a: 0deg;
+  }
+  100% {
+    --a: 360deg;
+  }
+}
+.box:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  background-color: repeating-conic-gradient(
+    from var(--a),
+    #01dbc2 0%,
+    #01dbc2 10%,
+    transparent 10%,
+    transparent 50%
+  );
+  animation: animate 6s linear infinite;
+  animation-delay: -1.5s;
+}
+.box::after {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  //border: 20px solid #222;
+  // background: #303030;
+  background: linear-gradient(5deg, aliceblue, transparent);
+}
+form {
+  position: relative;
+  z-index: 1000;
+}
+form h2 {
+  margin-bottom: 20px;
+  padding-top: 60px;
+  width: 100%;
+  color: cornflowerblue;
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.inputBx {
+  position: relative;
+  width: 240px;
+  margin-bottom: 40px;
+}
+.inputBx span {
+  position: absolute;
+  inset: -2px;
+  background: #f00;
+  z-index: 1;
+}
+.inputBx span::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: repeating-conic-gradient(
+    from var(--a),
+    rgb(43, 69, 117),
+    rgb(43, 69, 117) 10%,
+    transparent 10%,
+    transparent 50%
+  );
+  //animation: animate 6s linear infinite;
+  box-shadow: 0 0 0 2px whitesmoke;
+}
+.inputBx:nth-child(2) span::before {
+  animation-delay: -1.5s;
+}
+.inputBx span::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: aliceblue;
+}
+.inputBx input {
+  position: relative;
+  z-index: 100000;
+  outline: none;
+  border: none;
+  width: 100%;
+  padding: 8px 14px;
+  background: rgb(241, 244, 247);
+  color: cornflowerblue;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.inputBx input::placeholder {
+  color: rgb(53, 86, 147);
+  opacity: 0.5;
+  font-weight: 600;
+}
+.inputBx input[type="submit"] {
+  // background: #01dbc2;
+  // cursor: pointer;
+  // box-shadow: 0 0 0 4px #01dbc2;
+  // width: 100%;
+  // font-weight: 500;
+  // color: #292929;
+  // filter: drop-shadow(0 0 0 15px #01dbc2);
+  background: aliceblue;
+  cursor: pointer;
+  box-shadow: 0 0 0 4px cornflowerblue;
+  width: 100%;
+  font-weight: 600;
+  color: cornflowerblue;
+}
+.group {
+  position: relative;
+  top: -10px;
+  padding-bottom: 60px;
+  display: flex;
+  justify-content: space-between;
+}
+.group a {
+  text-decoration: none;
+  color: cornflowerblue;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.75em;
+}
+.group a:nth-child(2),
+.group a:hover {
+  color: #05afe3;
+  filter: drop-shadow(0 0 0 5px #01dbc2);
+}

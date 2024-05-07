@@ -1,11 +1,11 @@
-<h2 mat-dialog-title>Add MontlyBudget</h2>
+<h2 mat-dialog-title>Add Monthly Budget</h2>
 <form [formGroup]="addForm">
   <!-- (ngSubmit)="onSubmit()" -->
   <mat-dialog-content>
     <div>
       <mat-form-field class="example-full-width">
         <mat-label>Month and Year</mat-label>
-        <input matInput [matDatepicker]="dp" formControlName="date" />
+        <input id="date" [matDatepicker]="dp" formControlName="date" />
         <!-- [formControl]="date" -->
         <mat-hint>MM/YYYY</mat-hint>
         <mat-datepicker-toggle matIconSuffix [for]="dp"></mat-datepicker-toggle>
@@ -21,7 +21,7 @@
     <div>
       <mat-form-field class="example-full-width">
         <mat-label>Budget Type</mat-label>
-        <mat-select formControlName="expenseType">
+        <mat-select id="expenseType" formControlName="expenseType">
           <!-- [formControl]="expenseType" -->
           @for (expense of expenses; track expense) {
           <mat-option [value]="expense">{{ expense }}</mat-option>
@@ -38,7 +38,7 @@
     </div>
   </mat-dialog-content>
   <mat-dialog-actions>
-    <button type="submit" mat-dialog-close (click)="onSubmit()">Ok</button>
+    <button type="submit" id="ok" (click)="onSubmit()">Ok</button>
     <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
     <button mat-button (click)="onNoClick()">Close</button>
   </mat-dialog-actions>

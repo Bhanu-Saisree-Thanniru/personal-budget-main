@@ -2,18 +2,15 @@ import { Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-side-nav',
   templateUrl: './side-nav.component.html',
   styleUrl: './side-nav.component.scss',
 })
 export class SideNavComponent {
-  isSlideOut = true;
   constructor(private router: Router) {}
 
-  toggleSlideOut(): void {
-    this.isSlideOut = !this.isSlideOut;
-  }
   onDash() {
     this.router.navigate(['/budget/dashboard']);
   }
@@ -23,7 +20,7 @@ export class SideNavComponent {
   onHistory() {
     this.router.navigate(['/budget/history']);
   }
-  onLogout() {
+  onSignOut() {
     this.router.navigate(['/budget/logout']);
   }
 }

@@ -1,0 +1,52 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+}
+
+.snackbar-success {
+  background-color: #4caf50; /* Green */
+  color: white;
+}
+
+button {
+  background: linear-gradient(
+    135deg,
+    #1e3c72,
+    #2a5298
+  ); /* Appealing gradient */
+  border: 3px solid white; /* Add border */
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: flex; /* Use Flexbox for centering */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+  position: relative; /* Positioning context for the icon */
+  border-radius: 50px; /* Rounded corners */
+  font-weight: bold; /* Bold text */
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1); /* Shadow for 3D effect */
+}
+
+button:hover {
+  background: linear-gradient(
+    135deg,
+    #2a5298,
+    #1e3c72
+  ); /* Darker gradient on hover */
+  color: white;
+}
+
+button::before {
+  content: "\f08b"; /* Unicode for 'logout' icon in FontAwesome */
+  font-family: "FontAwesome"; /* Assuming you're using FontAwesome */
+  margin-right: 10px; /* Space between the icon and the button text */
+}

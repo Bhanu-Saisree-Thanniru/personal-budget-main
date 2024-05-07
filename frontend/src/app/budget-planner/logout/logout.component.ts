@@ -1,28 +1,15 @@
-// import { Component } from '@angular/core';
-
-// @Component({
-//   selector: 'app-logout-popup',
-//   templateUrl: './logout-popup.component.html',
-//   styleUrl: './logout-popup.component.scss'
-// })
-// export class LogoutPopupComponent {
-
-// }
-
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-logout-popup',
-  templateUrl: './logout-popup.component.html',
-  styleUrls: ['./logout-popup.component.scss'],
+  selector: 'app-logout',
+  templateUrl: './logout.component.html',
+  styleUrl: './logout.component.css'
 })
-export class LogoutPopupComponent {
+export class LogoutComponent {
   constructor(
-    public dialogRef: MatDialogRef<LogoutPopupComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
     private router: Router,
     private matSnackBar: MatSnackBar
   ) {}
@@ -37,5 +24,5 @@ export class LogoutPopupComponent {
       .subscribe(() => {
         this.router.navigate(['/budget/login']);
       });
-  }
+}
 }

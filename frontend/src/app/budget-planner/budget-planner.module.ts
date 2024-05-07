@@ -21,6 +21,9 @@ import { PrevHistoryComponent } from './prev-history/prev-history.component';
 import { SignupComponent } from './signup/signup.component';
 import { InActivityComponent } from './in-activity/in-activity.component';
 import { LineChartComponent } from './dashboard/Charts/line-chart/line-chart.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDividerModule } from '@angular/material/divider';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -35,8 +38,8 @@ import { LineChartComponent } from './dashboard/Charts/line-chart/line-chart.com
     PrevHistoryComponent,
     SignupComponent,
     InActivityComponent,
-    LineChartComponent
-    //LogoutPopupComponent
+    LineChartComponent,
+    LogoutComponent
   ],
   imports: [
     CommonModule,
@@ -44,6 +47,8 @@ import { LineChartComponent } from './dashboard/Charts/line-chart/line-chart.com
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
+    MatToolbarModule,
+    MatDividerModule,
     MatIconModule,
     MatDialogModule,
     MatDatepickerModule,

@@ -23,32 +23,6 @@ export class AuthenticationService {
 
   constructor(private afireAuth: AngularFireAuth) { }
 
-
-  // Login
-  // login(email: string, password: string){
-  //   return this.afireAuth.signInWithEmailAndPassword(email, password)
-  //         .catch((error) => {
-  //           console.log("Error signing in: " + error);
-  //         });
-  // }
-
-  // //signup
-  // signup(email: string, password: string){
-  //   return this.afireAuth.createUserWithEmailAndPassword(email, password)
-  //         .then((userCredential) => {
-  //           const user = userCredential.user;
-  //           console.log("User signed up: " + user);
-  //   }).catch((error) => {
-  //     console.log("Error: " + error);
-  //   })
-  //   ;
-  // }
-
-  // //logout
-  // logout(){
-  //   this.afireAuth.signOut();
-  // }
-
   userId!: string;
 
   signIn(params: SignIn): Observable<any>{

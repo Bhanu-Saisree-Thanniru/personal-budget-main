@@ -20,7 +20,7 @@
                     <h3>Current Month</h3>
                     <p>{{ currentMonthIncome }}</p>
                 </div>
-                <button class="button" (click)="onIncome()">Add</button>
+                <button class="button" id="addIncome" (click)="onIncome()">Add</button>
             </div>
         </div>
 
@@ -44,7 +44,7 @@
                 <p>{{ currentMonthExpense }}</p>
               </div>
             </div>
-            <button class="button" (click)="onExpense()">Add</button>
+            <button class="button" id="addExpense" (click)="onExpense()">Add</button>
         </div>
 
         <!-- Allocated Budget Card -->
@@ -65,7 +65,7 @@
             </ul>
           </div>
         </div>
-        <button class="button" (click)="onBudget()">Add</button>
+        <button class="button" id="addBudget" (click)="onBudget()">Add</button>
       </div>
 
         <!-- To DO Trans -->

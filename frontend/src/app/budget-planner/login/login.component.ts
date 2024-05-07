@@ -4,6 +4,8 @@ import { AuthenticationService } from '../authentication.service';
 import { error } from 'console';
 import firebase from 'firebase/compat/app';
 import { Router } from '@angular/router';
+import { InActivityComponent } from '../in-activity/in-activity.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +15,7 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   myForm!: FormGroup;
   loginError!: string;
-  constructor(private formBuilder: FormBuilder, private authService: AuthenticationService, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private authService: AuthenticationService, private router: Router, private dialog: MatDialog) {
 
   }
 
@@ -24,31 +26,7 @@ export class LoginComponent {
     });
   }
 
-  // login(){
-    // if(this.myForm.valid){
-    //   this.authService.signIn(this.myForm.value)
-    //   .subscribe({
-    //     next: () => {
-    //       const user = firebase.auth().currentUser;
-    //       const firebaseUserId = user ? user.uid : null;
-    //       console.log('firebaseUserId :' + firebaseUserId);
-    //       this.router.navigate(['/budget/dashboard']);
-    //     }
-    //   }
-        // (response => {
-        //   console.log("response: " + response);
-        //   const user = firebase.auth().currentUser;
-        //   const firebaseUserId = user ? user.uid : null;
-        //   this.router.navigate(['/budget/dashboard']);
-        // }),
-    //   error => { console.log("Error: " + error); }
-    // )
-    // }
-    // console.log("my form value: " + this.myForm.value);
 
-    // const user = firebase.auth().currentUser;
-    // const firebaseUserId = user ? user.uid : null;
- // }
  login() {
   if (this.myForm.valid) {
     const email = this.myForm.get('email')!.value;
@@ -105,6 +83,20 @@ inActivityTimerStart(){
     };
   }
 
+  showInactivityDialog() {
+    const dialogRef = this.dialog.open(InActivityComponent, {
+      width: '250px',
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 'refresh') {
+        this.inActivityTimerStart();
+      } else {
+        this.logout();
+      }
+    });
+  }
+
   logout() {
     // Clear the token from local storage
     localStorage.removeItem('token');
@@ -115,4 +107,5 @@ inActivityTimerStart(){
     // Navigate back to the login page
     this.router.navigate(['/budget/login']);
   }
+
 }

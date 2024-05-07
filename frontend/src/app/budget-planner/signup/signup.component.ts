@@ -32,14 +32,12 @@ export class SignupComponent {
       if (this.signupForm.valid) {
         const email = this.signupForm.get('email')!.value;
         const password = this.signupForm.get('password')!.value;
-        console.log("email : "+ email + "Password: " + password);
         this.authService.register({ email, password })
         .subscribe((response) => {
           console.log("response: " + response);
           this.matSnackBar.open('Signup Successful', 'Close', {
             duration: 2000,
           });
-          // Navigate to the login page after a delay
           setTimeout(() => {
             this.router.navigate(['/budget/login'])
           }, 2000);
@@ -47,21 +45,12 @@ export class SignupComponent {
         },
         error => {
             console.log(error);
-            // Handle specific login errors (e.g., invalid credentials)
-            if (error
-              // error.code === 'auth/user-not-found' ||
-              // error.code === 'auth/wrong-password' ||
-              // error.code === 'auth/invalid-credential'
-            ) {
+            if (error) {
               this.signupError = 'An error occurred. Please try again later.';
-            // } else {
-            //   this.loginError = 'An error occurred. Please try again later.';
-            // }
           }
         }
       );
       } else {
-        // If form is invalid, display error message
         this.signupError = 'Please enter valid email and password.';
       }
     }
